@@ -29,7 +29,7 @@ void Blackjack::play() {
                 while (true) {
                     cout << "Place bet";
                     if (cin >> bet && bet <= player.getEarnings()) break;
-                    cout << "Not enough money Broke nigga";
+                    cout << "Not enough money";
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
@@ -46,7 +46,7 @@ void Blackjack::play() {
 
 int Blackjack::singleRound(Player& p, Deck& deck, int bet) {
     vector<string> cards = deck.deal(2);
-    
+
 }
 
 void Blackjack::enterInfo() {
