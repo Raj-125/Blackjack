@@ -21,15 +21,15 @@ void Blackjack::play() {
 
     while (true) {
         Deck deck;
-
+        
         for (Player& player : players) {
             cout << player.getName() << '\n';
             if (player.getEarnings() > 0) {
                 int bet;
                 while (true) {
-                    cout << "Place bet";
+                    cout << "Place bet: ";
                     if (cin >> bet && bet <= player.getEarnings()) break;
-                    cout << "Not enough money";
+                    cout << "Not enough money" << endl;
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 }
@@ -46,7 +46,32 @@ void Blackjack::play() {
 
 int Blackjack::singleRound(Player& p, Deck& deck, int bet) {
     vector<string> cards = deck.deal(2);
-
+    int a = deck.valueOf(cards[0].substr(0,cards[0].size() - 1));
+    int b = deck.valueOf(cards[1].substr(0,cards[1].size() - 1));
+    int total = 0;
+    if (a == 11 && b == 11) {
+        total += 12;
+    } 
+    else if (a == 11 || b == 11) {
+        int t1 = a + b;
+        int t2 = a + b - 10;
+        string x;
+        while (true) {
+            cout << "Ace = " << to_string(11) << " or " << to_string(1) + "?" << '\n';
+            cin >> x;
+            if (x == "11" || x == "1") {
+                break;        
+            }
+            cout << "Invalid choice. Please enter 11 or 1." << endl;
+        }
+        if (x == "11") total += t1;
+        else total += t2;
+    }
+    else {
+        total += a + b;
+    }
+    cout << cards[0] + " / " << cards[1] << " --> Total: " + to_string(total) << endl;
+    return 0;
 }
 
 void Blackjack::enterInfo() {

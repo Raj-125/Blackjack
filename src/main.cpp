@@ -14,6 +14,5 @@ int main() {
         }
     Blackjack game = Blackjack(p);
     game.play();
-    game.playerInfo();
     return 0;
 }

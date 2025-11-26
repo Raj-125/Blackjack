@@ -48,28 +48,30 @@ string Deck::dealOne() {
     return card;
 }
 
+int Deck::valueOf(const string& rank) {
+    if (rank == "A") return 11;
+    if (rank == "K" || rank == "Q" || rank == "J") return 10;
+    return stoi(rank);  
+}
+
 
 void Deck::build() {
-    for (int i = 2; i < 15; i++) {
-        string x = to_string(i);
-        if (i == 11) {
-            x = "J";
-        } 
-        if (i == 12) {
-            x = "Q";
-        } 
-        if (i == 13) {
-            x = "K";
-        } 
-        if (i == 14) {
-            x = "A";
-        } 
-        deck.push_back(x + 'h');
-        deck.push_back(x + 's');
-        deck.push_back(x + 'c');
-        deck.push_back(x + 'd');
+    static const vector<string> suits = {"h", "s", "c", "d"};
+
+    for (int v = 2; v <= 14; v++) {
+        string rank;
+
+        if (v <= 10)       rank = to_string(v);
+        else if (v == 11)  rank = "J";
+        else if (v == 12)  rank = "Q";
+        else if (v == 13)  rank = "K";
+        else               rank = "A";  
+
+        for (const string& s : suits) {
+            deck.push_back(rank + s);   
+        }
     }
 
-    Deck::shuffleCards();
+    shuffleCards();
 }
 

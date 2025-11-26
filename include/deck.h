@@ -11,7 +11,6 @@ public:
     Deck();
     
     static const map<string, int> convert;
-    // void print();
 
     void shuffleCards();
 
@@ -20,6 +19,8 @@ public:
     vector<string> deal(int n);
 
     string dealOne();
+
+    int valueOf(const string& rank);
     
 private:
     vector<string> deck;
